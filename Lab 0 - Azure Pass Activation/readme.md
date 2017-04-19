@@ -1,6 +1,6 @@
 You have received an Azure Pass code.
 
-Now follow [these instructions](https://www.microsoftazurepass.com/howto) to activate your azure pass account
+Now follow [the instructions below](https://www.microsoftazurepass.com/howto) to activate your azure pass account.
 
 <div id="container">
 
@@ -12,9 +12,8 @@ Now follow [these instructions](https://www.microsoftazurepass.com/howto) to act
 Azure](screens/windowsAzureLogo.png "Microsoft Azure")](http://www.microsoftazurepass.com/)
 <div id="headerRight">
 
-\
-\
-[![](screens/searchButton.png)](javascript:searchQuery())
+
+
 
 </div>
 
@@ -43,9 +42,9 @@ Creating an Azure Pass subscription is a two step process.
 1.  Redeem your Azure Pass Promo Code
 2.  Activate your subscription
 
-</div>
 
-Step 1: Redeeming a Microsoft Azure Pass Promo Code: 
+
+Step 1: Redeeming a Microsoft Azure Pass Promo Code: 
 =====================================================
 
 <div class="howToIndividualStep">
@@ -94,7 +93,7 @@ The Azure subscription will be created in this account
 ##### Enter your account login information and select “Sign In”.
 
 ![](screens/Picture4A.png)\
-### Or {style="text-align:center"}
+### Or
 
 \
 ##### If your account is both a Live ID and Org ID please select which account you would like to use.
@@ -205,7 +204,7 @@ then use Method 2.
 </div>
 
 \
-##### Choose one of the following {.stepDescription}
+##### Choose one of the following 
 
 <div class="howToIndividualStep">
 
@@ -219,7 +218,7 @@ then use Method 2.
 ##### Click ‘Sign up for a free trial’
 
 ![](screens/Picture11.png)\
-### Or {style="text-align:center"}
+### Or 
 
 \
 #### You have other subscriptions
@@ -242,7 +241,7 @@ then use Method 2.
 ##### Click ‘Select the Upgrade Offer (Azure Pass)’
 
 ![](screens/Picture13.png)\
-### Or {style="text-align:center"}
+### Or 
 
 \
 ##### Scroll though the list of options and click ‘Azure Pass’
@@ -251,11 +250,11 @@ then use Method 2.
 
 </div>
 
-##### If the Azure Pass option is not available: {.stepDescription}
+##### If the Azure Pass option is not available: 
 
-##### Confirm that you are logged into the correct account. {.stepDescription}
+##### Confirm that you are logged into the correct account. 
 
-##### Confirm you are logged into your Microsoft Account (LiveID) not your Organizational ID, if you have both (See Appendix 2). {.stepDescription}
+##### Confirm you are logged into your Microsoft Account (LiveID) not your Organizational ID, if you have both (See Appendix 2). 
 
 <div class="clear">
 
@@ -272,7 +271,7 @@ then use Method 2.
 
 </div>
 
-##### Azure Pass subscriptions do not require a credit card, if you are asked for a credit card confirm you are signing up for Azure Pass. {.stepDescription}
+##### Azure Pass subscriptions do not require a credit card, if you are asked for a credit card confirm you are signing up for Azure Pass.
 
 <div class="clear">
 
@@ -332,7 +331,7 @@ You can create a new Microsoft Account, or you can use an existing email address
 </div>
 
 \
-### Or {style="text-align:center"}
+### Or
 
 \
 <div class="howToIndividualStep">
