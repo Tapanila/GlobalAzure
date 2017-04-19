@@ -9,12 +9,12 @@ Now follow [these instructions](https://www.microsoftazurepass.com/howto) to act
 <div id="header">
 
 [![Microsoft
-Azure](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/windowsAzureLogo.png "Microsoft Azure")](http://www.microsoftazurepass.com/)
+Azure](screens/windowsAzureLogo.png "Microsoft Azure")](http://www.microsoftazurepass.com/)
 <div id="headerRight">
 
 \
 \
-[![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/searchButton.png)](javascript:searchQuery())
+[![](screens/searchButton.png)](javascript:searchQuery())
 
 </div>
 
@@ -34,7 +34,7 @@ Azure](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/windowsAzureLogo.png "M
 
 <div id="howToContent">
 
-Creating a Microsoft Azure Pass Subscription {.howToHeading}
+Creating a Microsoft Azure Pass Subscription
 ============================================
 
 <div class="howToSteps">
@@ -45,7 +45,7 @@ Creating an Azure Pass subscription is a two step process.
 
 </div>
 
-Step 1: Redeeming a Microsoft Azure Pass Promo Code: {.howToStepHeading}
+Step 1: Redeeming a Microsoft Azure Pass Promo Code: 
 =====================================================
 
 <div class="howToIndividualStep">
@@ -56,7 +56,7 @@ Step 1: Redeeming a Microsoft Azure Pass Promo Code: {.howToStepHeading}
 It is recommended you use an In-Private Browser session. Other log-ins
 can persist and cause errors during the activation step.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture1.png)
+![](screens/Picture1.png)
 
 </div>
 
@@ -69,7 +69,7 @@ can persist and cause errors during the activation step.
 
 ##### Click ‘Submit’.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture2.png)
+![](screens/Picture2.png)
 
 </div>
 
@@ -84,7 +84,7 @@ The Azure subscription will be created in this account
 
 (instructions can be found in appendix 1)
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture3.png)
+![](screens/Picture3.png)
 
 </div>
 
@@ -93,13 +93,13 @@ The Azure subscription will be created in this account
 <span class="numberingSpan">4</span>
 ##### Enter your account login information and select “Sign In”.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture4A.png)\
+![](screens/Picture4A.png)\
 ### Or {style="text-align:center"}
 
 \
 ##### If your account is both a Live ID and Org ID please select which account you would like to use.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture4B.png)
+![](screens/Picture4B.png)
 
 </div>
 
@@ -111,7 +111,7 @@ The Azure subscription will be created in this account
 \
 ##### Click ‘Submit’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture5.png)
+![](screens/Picture5.png)
 
 </div>
 
@@ -120,22 +120,22 @@ The Azure subscription will be created in this account
 <span class="numberingSpan">6</span>
 ##### Click ‘Activate’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture6.png)
+![](screens/Picture6.png)
 
 </div>
 
 \
-Congratulations, you have successfully completed Step 1 and redeemed your Azure Pass Promo Code. {.howToStepHeading}
+Congratulations, you have successfully completed Step 1 and redeemed your Azure Pass Promo Code.
 ================================================================================================
 
 \
 \
-Step 2: Activating a Microsoft Azure Pass Subscription: {.howToStepHeading}
+Step 2: Activating a Microsoft Azure Pass Subscription:
 ========================================================
 
 \
 \
-Method 1 {.howToStepHeading}
+Method 1
 ========
 
 Almost all users will be able to activate their subscription using
@@ -153,7 +153,7 @@ This needs to match your account information
 
 ##### Click ‘Sign up’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture7.png)
+![](screens/Picture7.png)
 
 </div>
 
@@ -162,7 +162,7 @@ This needs to match your account information
 <span class="numberingSpan">2</span>
 ##### It make take a few minutes, **DO NOT** refresh or close your browser.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture8.png)
+![](screens/Picture8.png)
 
 </div>
 
@@ -175,15 +175,15 @@ You may need to refresh the page
 
 ##### After your subscription is provisioned you can start using by clicking ‘Portal.’
 
-##### In the future you can navigate directly to the management portal: [http://manage.windowsazure.com](http://manage.windowsazure.com/)
+##### In the future you can navigate directly to the management portal: [http://portal.azure.com](http://portal.azure.com/)
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture9.png)
+![](screens/Picture9.png)
 
 </div>
 
 \
 \
-Method 2 {.howToStepHeading}
+Method 2
 ========
 
 If you received an error message or were unable to complete Method 1,
@@ -196,7 +196,7 @@ then use Method 2.
 
 ##### If you get the message ‘promo code is already used,’ you have successfully completed Step 1 of the process.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture10.png)
+![](screens/Picture10.png)
 
 </div>
 
@@ -218,7 +218,7 @@ then use Method 2.
 
 ##### Click ‘Sign up for a free trial’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture11.png)\
+![](screens/Picture11.png)\
 ### Or {style="text-align:center"}
 
 \
@@ -232,7 +232,7 @@ then use Method 2.
 
 ##### Click ‘add subscription’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture12.png)
+![](screens/Picture12.png)
 
 </div>
 
@@ -241,13 +241,13 @@ then use Method 2.
 <span class="numberingSpan">3</span>
 ##### Click ‘Select the Upgrade Offer (Azure Pass)’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture13.png)\
+![](screens/Picture13.png)\
 ### Or {style="text-align:center"}
 
 \
 ##### Scroll though the list of options and click ‘Azure Pass’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture14.png)
+![](screens/Picture14.png)
 
 </div>
 
@@ -268,7 +268,7 @@ then use Method 2.
 
 ##### Click ‘Sign up’
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture15.png)
+![](screens/Picture15.png)
 
 </div>
 
@@ -283,7 +283,7 @@ then use Method 2.
 <span class="numberingSpan">5</span>
 ##### It make take a few minutes, **DO NOT** refresh or close your browser.
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture16.png)
+![](screens/Picture16.png)
 
 </div>
 
@@ -302,7 +302,7 @@ You may need to refresh the page
 
 ##### In the future you can navigate directly to the management portal: [http://manage.windowsazure.com](http://manage.windowsazure.com/)
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture17.png)
+![](screens/Picture17.png)
 
 </div>
 
@@ -312,14 +312,14 @@ You may need to refresh the page
 
 \
 \
-Appendix 1: {.howToStepHeading}
+Appendix 1: 
 ===========
 
-Creating a New Microsoft Account: {.howToStepHeading}
+Creating a New Microsoft Account: 
 =================================
 
 \
-You can create a new Microsoft Account, or you can use an existing email address. {.howToStepHeading}
+You can create a new Microsoft Account, or you can use an existing email address. 
 =================================================================================
 
 <div class="howToIndividualStep">
@@ -327,7 +327,7 @@ You can create a new Microsoft Account, or you can use an existing email address
 <span class="numberingSpan">A</span>
 #### New Microsoft Account
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture18.png)
+![](screens/Picture18.png)
 
 </div>
 
@@ -339,7 +339,7 @@ You can create a new Microsoft Account, or you can use an existing email address
 
 #### Existing Email
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture19.png)
+![](screens/Picture19.png)
 
 </div>
 
@@ -352,7 +352,7 @@ You can create a new Microsoft Account, or you can use an existing email address
 <span class="numberingSpan">B</span>
 ##### Create a new Organizational Account
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture21.png)
+![](screens/Picture21.png)
 
 </div>
 
@@ -362,10 +362,10 @@ You can create a new Microsoft Account, or you can use an existing email address
 
 \
 \
-Appendix 2: {.howToStepHeading}
+Appendix 2: 
 ===========
 
-Confirming Microsoft Account Login {.howToStepHeading}
+Confirming Microsoft Account Login 
 ==================================
 
 <div class="howToIndividualStep">
@@ -373,7 +373,7 @@ Confirming Microsoft Account Login {.howToStepHeading}
 <span class="numberingSpan">A</span>
 ##### If you confirmed you are in the correct account, then check that you are using your Microsoft Account (LiveID) or Organizational Account by going to URL: <http://account.windowsazure.com/test>
 
-![](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/Picture20.png)
+![](screens/Picture20.png)
 
 </div>
 
@@ -397,11 +397,6 @@ Case](http://azure.microsoft.com/en-us/support/options/).
 </div>
 
 <div class="bottom-right-content">
-
-[![Facebook](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/facebook.png)](http://www.facebook.com/windowsazure)
-[![Twitter](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/twitter.png)](http://twitter.com/WindowsAzure)
-[![YouTube](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/youtube.png)](http://www.youtube.com/windowsazure)
-[![Blog](Microsoft%20Azure%20Pass%20-%20How%20to_tiedostot/blog.png)](http://blogs.msdn.com/windowsazure/)
 
 </div>
 
