@@ -1,10 +1,8 @@
-# Module 2: Building Application Infrastructure in Azure
-
-# Lab: Creating an Azure Virtual Machine for Development and Testing
+# Creating an Azure Virtual Machine for Development and Testing
 
 ### Scenario
 
-Before you begin the process of migrating your application from an on premise server to Azure, you must create a development environment. You have elected to use Azure to host a Windows Server 2012 R2 Virtual Machine. In this Virtual Machine, you will install project files, Visual Studio 2017 Community Edition, Azure SDK for .NET and Azure PowerShell. Once complete, you will use this virtual machine for all remaining development tasks.
+You have elected to use Azure to host a Windows Server 2012 R2 Virtual Machine. In this Virtual Machine, you will install project files, Visual Studio 2015 Community Edition, Azure SDK for .NET and Azure PowerShell. Once complete, you will use this virtual machine for all remaining development tasks.
 
 ### Objectives
 
@@ -21,14 +19,6 @@ After you complete this lab, you will be able to:
 * Manage the virtual machine VHDs.
 
 * Install development software on a virtual machine.
-
-### Lab Setup
-
-**Estimated Time: 90 minutes**
-
-For this lab, you will use the available host machine. Before you begin this lab, you must complete the following steps:
-
-  1. Verify that you received the credentials from your training provider to sign in to the Azure portal. You will use these credentials and the Azure account throughout the labs in this course.
 
 ## Exercise 1: Creating a Network and Resource Container
 
@@ -52,7 +42,7 @@ The main tasks for this exercise are as follows:
 
 1. View the list of resource groups for your subscription.
 
-2. Create a new resource group using the name: **20532**.
+2. Create a new resource group using the name: **globalazure**.
 
 #### Task 3: Create a Virtual Network
 
@@ -60,11 +50,11 @@ The main tasks for this exercise are as follows:
 
 2. Create a virtual network by using the following details:
 
-  - Name: **vnet20532**
+  - Name: **vnetglobalazure**
 
-  - Location: **Select the region that is closest to your location**
+  - Location: **West Europe**
 
-  - Existing Resource Group: **20532**
+  - Existing Resource Group: **globalazure**
 
   - Address Space: **10.0.0.0/16**
 
@@ -92,7 +82,7 @@ The main tasks for this exercise are as follows:
 
 2. Create a Storage instance by using the following details:
 
-  - Name: **stor20532[Your Name Here]**
+  - Name: **storglobalazure[Your Name Here]**
 
   - Deployment model: **Resource manager**
 
@@ -102,51 +92,39 @@ The main tasks for this exercise are as follows:
 
   - Replication: **Locally-redundant storage (LRS)**  
 
-  - Resource Group: **20532**
+  - Resource Group: **globalazure**
 
-  - Location: **Select the region that is closest to your location**
+  - Location: **West Europe**
 
 #### Task 2: Create a virtual machine
 
 1. View the list of virtual machines for your subscription.
 
-1. Go to the Virtual Machine gallery and select the **Visual Studio Community 2017 on Windows Server 2016 (x64)** template.
+1. Go to the Virtual Machine gallery and select the **Visual Studio Community 2015 Update 3 with Azure SDK 2.9 on Windows Server 2012 R2** template.
 
 2. Create a new virtual machine using the template and the following details:
 
-  - Name: **vm20532**
+  - Name: **vmglobalazure**
 
-  - VM disk type: **HDD**
+  - VM disk type: **SSD**
 
   - User Name: **Student**
 
   - Password: **AzurePa$$w0rd**
 
-  - Size: **F4 Standard**
+  - Resource Group: **globalazure**
 
-  - Virtual Network: **vnet20532**
+  - Size: **DS1_V2**
+
+  - Storage Account: **storglobalazure[Your Name Here]**
+  
+  - Virtual Network: **vnetglobalazure**
 
   - Subnet: **Apps**
 
-  - Resource Group: **20532**
-
-  - Storage Account: **stor20532[Your Name Here]**
-
-  - Diagnostic Storage Account: **Disabled**
-
-  - Image: **Windows Server 2012 R2 Datacenter**
-
-3. Add a second disk to the virtual machine by using the following settings:
-
-  - Disk File Name: **vm20532-AllFiles.vhd**
-
-  - Size (GiB): **128**
-
-  - Type: **HDD**
-
-  - Storage Account: **stor20532[Your Name Here]**
-
-  - Storage Container: **vhds**
+  - Boot diagnostics: **Disabled**
+    
+  - Guest OS diagnostics: **Disabled**
 
 4. Connect to the newly created virtual machine using Remote Desktop.
 
@@ -162,43 +140,15 @@ The main tasks for this exercise are as follows:
 
 1. Disable Internet Explorer Enhanced Security Configuration
 
-1. Create an AllFiles drive and extract the AllFiles Content to it.
-
-1. Authenticate to Visual Studio using the Microsoft Account associated with your Azure subscription.
-
 #### Task 1: Disable IE Enhanced Security Configuration
 
 1. If Server Manager is not already open, open **Server Manager**.
 
 2. Within the *Local Server* configuration screen, disable **Internet Explorer Enhanced Security Configuration** for both *Administrators* and *Users*.
 
-#### Task 2: Create an AllFiles Drive
+#### Task 2: Add your Azure subscription to Visual Studio
 
-3. Initialize the new disk by using the Windows Disk Manager.
-
-4. Format the new empty drive partition by using the following settings:
-
-  - Drive Letter: **F**
-
-  - Volume Label: **AllFiles**
-
-  - Partition Style: **MBR (Master Boot Record)**
-
-#### Task 3: Download the AllFiles Content
-
-5. Download the **AllFiles** compressed folder from the GitHub website
-
-  - (https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions/releases/latest)
-
-6. Unblock the AllFiles compressed folder.
-
-7. Extract the content of the AllFiles compressed folder to the drive F.
-
-  - Extract target: **Allfiles** **(F):\\**
-
-#### Task 4: Add your Azure subscription to Visual Studio
-
-1. Open **Visual Studio 2017**.
+1. Open **Visual Studio 2015**.
 
 2. When prompted, sign-in using the **Microsoft Account** associated with your Azure subscription.
 
@@ -206,7 +156,7 @@ The main tasks for this exercise are as follows:
 
 3. Validate that you can see the Visual Studio **Start Page**.
 
-> **Results:** After completing this exercise, your development virtual machine will have your lab files installed. Your virtual machine will also have Visual Studio, Azure PowerShell, and the Azure SDK installed.
+> **Results:** After completing this exercise, your virtual machine has Visual Studio, Azure PowerShell, and the Azure SDK installed.
 
-©2016 Microsoft Corporation. All rights reserved.  The text in this document is available under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/legalcode "Creative Commons Attribution 3.0 License"), additional terms may apply.  All other content contained in this document (including, without limitation, trademarks, logos, images, etc.) are **not** included within the Creative Commons license grant.  This document does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this document for your internal, reference purposes.  
+Â©2016 Microsoft Corporation. All rights reserved.  The text in this document is available under the [Creative Commons Attribution 3.0 License](https://creativecommons.org/licenses/by/3.0/legalcode "Creative Commons Attribution 3.0 License"), additional terms may apply.  All other content contained in this document (including, without limitation, trademarks, logos, images, etc.) are **not** included within the Creative Commons license grant.  This document does not provide you with any legal rights to any intellectual property in any Microsoft product. You may copy and use this document for your internal, reference purposes.  
 This document is provided "as-is." Information and views expressed in this document, including URL and other Internet Web site references, may change without notice. You bear the risk of using it. Some examples are for illustration only and are fictitious. No real association is intended or inferred. Microsoft makes no warranties, express or implied, with respect to the information provided here.  
