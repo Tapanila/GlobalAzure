@@ -9,8 +9,6 @@
 
 - Manage web apps.
 
-- Implement Traffic Manager to load-balance web apps. 
-
 ## Exercise 1: Creating web apps
   
 ### Scenario
