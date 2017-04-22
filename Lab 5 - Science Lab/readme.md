@@ -1,7 +1,7 @@
 ![Global Azure Bootcamp 2017 - Science Lab](https://globalazurebootcamp.blob.core.windows.net/images/Pano-ORM-perfil-Lactea-DLopez-779x389.jpg)
 
 # Introduction
-This project contains all the source code for the Global Azure Bootcamp 2017 Science Lab. Created by David Rodriguez ([@davidjrh](http://twitter.com/davidjrh)), Adonai Su·rez ([@adonaisg](http://twitter.com/adonaisg)), 
+This project contains all the source code for the Global Azure Bootcamp 2017 Science Lab. Created by David Rodriguez ([@davidjrh](http://twitter.com/davidjrh)), Adonai Su√°rez ([@adonaisg](http://twitter.com/adonaisg)), 
 Martin Abbott ([@martinabbott](http://twitter.com/martinabbott)) and Wesley Cabus ([@WesleyCabus](http://twitter.com/wesleycabus)) for the Global Azure Bootcamp 2017 Science Lab running Sebastian Hidalgo's Star 
 Formation History SELIGA algorithm at the [Instituto de Astrofisica de Canarias](http://www.iac.es/index.php?lang=en).
 
@@ -87,7 +87,7 @@ Now relax and wait for the green check. Will take around 10 minutes to complete.
 2. Change the value of the parameters. Before do this, read the next notes:
     * **Email, FullName, TeamName, CompanyName**: fill with your personal info. It be displayed on the global dashboards.
     * **CountryCode**: the 2 character ISO2 country code. Find your code at [Wikipedia](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-    * **LabKeyCode**: Is a predefined string with your location LAB Key. Ask admin staff at your location for the code.    
+    * **LabKeyCode**: JGA-MGB-XBL    
     * **VirtualMachinesSku**: Size of the virtual machines for the Azure Batch pool. We recommend select one of these (1 core Skus available for batch pools):
         * Standard_A1        
         * Standard_D1

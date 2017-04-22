@@ -70,24 +70,30 @@ Now that you created a web app in Azure, and added a deployment slot for the web
 
 The main tasks for this exercise are as follows:
 
-1. Obtain a publishing profile
+1. Download web application source code
 
-2. Deploy a web app
+2. Obtain a publishing profile
 
+3. Deploy a web app
 
+#### Task 1: Download web application source code
 
-#### Task 1: Obtain a publishing profile
+1. Download the zip containing source code https://github.com/Tapanila/GlobalAzure/raw/master/Lab%202%20-%20Creating%20web%20app/Lab%202%20-%20Creating%20web%20app.zip
+
+2. Extract the zip file
+
+#### Task 2: Obtain a publishing profile
   
 1. From the Azure portal, download the publish profile for the Web app you created in Exercise 1.
 
-2. Open the web-application project stored in D:\\LabFiles\\Lab05\\Starter\\AdatumWebsite\\AdatumWebsite.sln in Visual Studio 2015:
+2. Open the web-application that you downloaded on Task 1 \\AdatumWebsite\\AdatumWebsite.sln in Visual Studio 2015
 
 3. Start debugging the web application, examine the contents, and then close Internet Explorer.
 
 > **Note:** When you start the web application in Visual Studio, the web app runs in IIS Express on your local workstation.
 
 
-#### Task 2: Deploy a web app
+#### Task 3: Deploy a web app
   
 1. In Visual Studio, start the Publish Wizard for the **AdatumWebsite** project, and then import the **.PublishSettings** file that you downloaded in task 1 of this exercise.
 
@@ -128,7 +134,7 @@ The main tasks for this exercise are as follows:
   
 1. In the Azure portal, download a publishing profile for the Staging slot for your web app.
 
-2. Open the project in D:\\LabFiles\\Lab05\\Starter\\NewAdatumWebsite\\AdatumWebsite.sln in Visual Studio
+2. Open the project you downloaded on Task 1 \\NewAdatumWebsite\\AdatumWebsite.sln in Visual Studio 20
 
 3. Start the web app publishing process and import the staging publishing profile that you downloaded in the first step.
 
