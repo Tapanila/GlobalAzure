@@ -289,9 +289,7 @@ The Azure Function you created in [Exercise 2](#Exercise2) loads a subscription 
 
 1. Return to your Function App in the Azure Portal and click **Platform features** in the right pane tabs.
 
-    ![Viewing Function App settings](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/function-app-select-app-settings.png)
 
-    _Viewing Function App settings_
 
 1. Under General Settings click **Application Settings**.
 
