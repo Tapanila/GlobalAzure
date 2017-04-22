@@ -287,19 +287,19 @@ The Azure Function you created in [Exercise 2](#Exercise2) loads a subscription 
 
     _Copying the subscription key to the clipboard_
 
-1. Return to your Function App in the Azure Portal and click **Function app settings** in the lower-left corner of the function designer.
+1. Return to your Function App in the Azure Portal and click **Platform features** in the right pane tabs.
 
     ![Viewing Function App settings](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/function-app-select-app-settings.png)
 
     _Viewing Function App settings_
 
-1. Scroll down the page and click **Go to App Service Settings**.
+1. Under General Settings click **Application Settings**.
 
     ![Viewing App Service settings](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/open-app-service-settings.png)
 
     _Viewing App Service settings_
 
-1. Click **Application settings**. Then scroll down until you find the "App settings" section. Add a new app setting named "SubscriptionKey" (without quotation marks), and paste the subscription key that is on the clipboard into the **Value** box. Then click **Save** at the top of the blade.
+Add a new app setting named "SubscriptionKey" (without quotation marks), and paste the subscription key that is on the clipboard into the **Value** box. Then click **Save** at the top of the blade.
 
     ![Adding a subscription key](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/add-key.png)
 
