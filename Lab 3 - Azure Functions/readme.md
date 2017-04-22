@@ -295,10 +295,6 @@ The Azure Function you created in [Exercise 2](#Exercise2) loads a subscription 
 
 1. Under General Settings click **Application Settings**.
 
-    ![Viewing App Service settings](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/open-app-service-settings.png)
-
-    _Viewing App Service settings_
-
 Add a new app setting named "SubscriptionKey" (without quotation marks), and paste the subscription key that is on the clipboard into the **Value** box. Then click **Save** at the top of the blade.
 
     ![Adding a subscription key](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/add-key.png)
@@ -311,7 +307,7 @@ Add a new app setting named "SubscriptionKey" (without quotation marks), and pas
 
     _Opening the function_
 
-1. Make sure **Develop** is selected. Then click **Run** to recompile and run the function. Confirm that "Compilation succeeded" appears in the output log.
+1. **Run** to recompile and run the function. Confirm that "Compilation succeeded" appears in the output log.
 	
     ![Recompiling the function](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Cloud%20Computing/Azure%20Functions/Session%202%20-%20Hands%20On/Images/function-recompile.png)
 
