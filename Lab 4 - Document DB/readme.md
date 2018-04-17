@@ -1,26 +1,28 @@
 <a name="HOLTitle"></a>
-# Using Azure DocumentDB #
+# Using Azure Cosmos DB and the DocumentDB API #
 
 ---
 
 <a name="Overview"></a>
 ## Overview ##
 
-Whether it targets businesses, consumers, or both, an app is only as meaningful as the data that drives it. With consumer and organizational requirements changing constantly, as well as the need to store, index, and optimize data and structures as they change, the need for a more open, flexible, and schema-agnostic data solution has been become essential. Azure DocumentDB addresses these challenges and makes it easy to adjust and adapt data models on the fly, as business logic and application scenarios change.
+Whether it targets businesses, consumers, or both, an app is only as meaningful as the data that drives it. With consumer and organizational requirements changing constantly, as well as the need to store, index, and optimize data and structures as they change, the need for a more open, flexible, and schema-agnostic data solution has been become essential. Azure Cosmos DB addresses this need and more and makes it easy to adjust and adapt data models on the fly, as business logic and application scenarios change.
 
-[DocumentDB](https://azure.microsoft.com/en-us/services/documentdb/) is a fully managed NoSQL database service built for fast performance, high availability, elastic scaling, and ease of development. As a schema-free NoSQL database, DocumentDB provides rich and familiar SQL query capabilities over JSON data, ensuring that 99% of your reads are served under 10 milliseconds and 99% of your writes are served under 15 milliseconds. These unique benefits make DocumentDB a great fit for Web, mobile, gaming, IoT, and many other applications that need seamless scale and global replication.
+[Azure Cosmos DB](https://azure.microsoft.com/services/cosmos-db/) is Microsoft's globally distributed, multi-model database service for mission-critical applications. It supports turn-key global distribution, elastic scaling of throughput and storage worldwide, single-digit millisecond latencies at the 99th percentile, five well-defined consistency levels, and guaranteed high availability, all backed by industry-leading SLAs. Azure Cosmos DB automatically indexes data without requiring you to deal with schema and index management. It is multi-model and supports document, key-value, graph, and columnar data models.
 
-In this lab, you will deploy an Azure DocumentDB database to store customer and product order information for the fictitious company *Adventure Works*, and you will connect it to Azure Search to index the data and implement auto-suggest. You will also write a Web app that uses the database and demonstrates how easily applications can consume data from DocumentDB.
+[DocumentDB](https://docs.microsoft.com/azure/cosmos-db/documentdb-introduction) is a feature of Cosmos DB implementing a fully managed NoSQL database service built for fast performance, high availability, elastic scaling, and ease of development. As a schema-free NoSQL database, DocumentDB provides rich and familiar SQL query capabilities over JSON data, ensuring that 99% of your reads are served under 10 milliseconds and 99% of your writes are served under 15 milliseconds. These unique benefits make DocumentDB a great fit for Web, mobile, gaming, IoT, and many other applications that need seamless scale and global replication.
+
+In this lab, you will deploy a DocumentDB database under Cosmos DB to store customer and product order information for the fictitious company *Adventure Works*, and you will connect it to Azure Search to index the data and implement auto-suggest. You will also write a Web app that uses the database and demonstrates how easily applications can consume data from DocumentDB.
 
 <a name="Objectives"></a>
 ### Objectives ###
 
 In this hands-on lab, you will learn how to:
 
-- Create an Azure DocumentDB account
+- Create an Azure Cosmos DB account
 - Create DocumentDB collections and populate them with documents
 - Create an Azure Search service and and use it to index DocumentDB data
-- Access Azure DocumentDB collections from your apps
+- Access DocumentDB collections from your apps
 - Query the Azure Search service connected to a DocumentDB database
 
 <a name="Prerequisites"></a>
@@ -29,7 +31,7 @@ In this hands-on lab, you will learn how to:
 The following are required to complete this hands-on lab:
 
 - An active Microsoft Azure subscription. If you don't have one, [sign up for a free trial](https://azure.microsoft.com/en-us/free/).
-- [Visual Studio 2015 Community edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) or higher
+- [Visual Studio 2017 Community edition](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx) or higher with the "ASP.NET and web development" and "Azure development" workloads installed
  
 ---
 
@@ -38,76 +40,74 @@ The following are required to complete this hands-on lab:
 
 This hands-on lab includes the following exercises:
 
-- [Exercise 1: Create a DocumentDB account](#Exercise1)
-- [Exercise 2: Create a database and collections](#Exercise2)
+- [Exercise 1: Create a Cosmos DB account](#Exercise1)
+- [Exercise 2: Create a DocumentDB database and collections](#Exercise2)
 - [Exercise 3: Populate collections with documents](#Exercise3)
 - [Exercise 4: Connect Azure Search](#Exercise4)
-- [Exercise 5: Build an Azure Web App](#Exercise5)
+- [Exercise 5: Build a Web app](#Exercise5)
 - [Exercise 6: Add auto-suggest](#Exercise6)
  
 Estimated time to complete this lab: **60** minutes.
 
 <a name="Exercise1"></a>
-## Exercise 1: Create a DocumentDB account ##
+## Exercise 1: Create a Cosmos DB account ##
 
-The first step in working with Azure DocumentDB is to create a DocumentDB account to hold databases, collections, and documents. In this exercise, you will create a DocumentDB account using the Azure Portal.
+The first step in working with DocumentDB is to create a Cosmos DB account to hold databases, collections, and documents. In this exercise, you will create a Cosmos DB account using the Azure Portal.
 
 1.	Open the [Azure Portal](https://portal.azure.com) in your browser. If you are asked to sign in, do so with your Microsoft Account.
 
-1.	Click **+ New**, followed by **Database** and **DocumentDB (NoSQL)**.	
+1.	Click **+ New**, followed by **Databases** and **Azure Cosmos DB**.	
 
-    ![Creating a DocumentDB account](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-create-new-documentdb.png)
+    ![Creating a Cosmos DB account](Images/portal-create-new-documentdb.png)
 
-    _Creating a DocumentDB account_
+    _Creating a Cosmos DB account_
 
-1. In the "NoSQL (DocumentDB)" blade, give the account a unique name such as "documentdbhol" and make sure a green check mark appears next to it. (You can only use numbers and lowercase letters since the name becomes part of a DNS name.) Make sure **DocumentDB** is selected for **NoSQL API**. Select **Create new** under **Resource group** and name the resource group "DocumentDBResourceGroup." Select the **Location** nearest you, and then click the **Create** button.
+1. In the "Azure Cosmos DB" blade, give the account a unique name such as "documentdbhol" and make sure a green check mark appears next to it. (You can only use numbers and lowercase letters since the name becomes part of a DNS name.) Select **SQL (DocumentDB)** as the **API**. Then select **Create new** under **Resource group** and name the resource group "DocumentDBResourceGroup." Select the **Location** nearest you, and then click the **Create** button.
 
-    ![Specifying DocumentDB parameters](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-configure-new-documentdb.png)
+    ![Specifying Cosmos DB parameters](Images/portal-configure-new-documentdb.png)
 
-    _Specifying DocumentDB parameters_
+    _Specifying Cosmos DB parameters_
 
-1. Click **Resource groups** in the ribbon on the left side of the portal, and then click the resource group created for the DocumentDB account.
+1. Click **Resource groups** in the ribbon on the left side of the portal, and then click the resource group created for the Cosmos DB account.
  
-    ![Opening the resource group](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-resource-group.png)
+    ![Opening the resource group](Images/open-resource-group.png)
 
     _Opening the resource group_
 
-1. Wait until "Deploying" changes to "Succeeded," indicating that the DocumentDB account has been deployed.
+1. Wait until "Deploying" changes to "Succeeded," indicating that the Cosmos DB account has been deployed. You can click the **Refresh** button at the top of the blade to refresh the deployment status.
 
-	> Refresh the page in the browser every now and then to update the deployment status. Clicking the **Refresh** button in the resource-group blade refreshes the list of resources in the resource group, but does not reliably update the deployment status.
-
-    ![Viewing the deployment status](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/deployment-status.png)
+    ![Viewing the deployment status](Images/deployment-status.png)
 
     _Viewing the deployment status_
 
-Your DocumentDB account is now provisioned and ready for you to start working with it.
+Your Cosmos DB account is now provisioned and ready for you to start working with it.
 
 <a name="Exercise2"></a>
-## Exercise 2: Create a database and collections ##
+## Exercise 2: Create a DocumentDB database and collections ##
 
-Now that you’ve deployed a DocumentDB account, the next step is to create a database and add collections to it in preparation for storing documents. In this exercise, you will create a database and add three collections to it for storing information about customers, products, and orders.
+Now that youâ€™ve created a Cosmos DB account, the next step is to create a database and add collections to it in preparation for storing documents. In this exercise, you will create a database and add three collections to it for storing information about customers, products, and orders.
 
-1. Click the DocumentDB account that you deployed in [Exercise 1](#Exercise1).
+1. Click the Cosmos DB account that you deployed in [Exercise 1](#Exercise1).
 
-    ![Opening the DocumentDB account](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-documentdb.png)
+    ![Opening the Cosmos DB account](Images/open-documentdb.png)
 
-    _Opening the DocumentDB account_
+    _Opening the Cosmos DB account_
 
 1. Click **+ Add Collection**.
 
-    ![Adding a collection](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/add-collection.png)
+    ![Adding a collection](Images/add-collection.png)
 
     _Adding a collection_
 
-1. Enter "Customers" (without quotation marks) as the **Collection Id** and select **10 GB** as the **STORAGE CAPACITY**. Select **Create New** under **DATABASE** and specify "CustomerOrders" as the database name. Then click the **OK** button.
+1. Enter "Customers" (without quotation marks) as the **Collection Id** and make sure **STORAGE CAPACITY** is set to **Fixed (10 GB)**. Select **Create New** under **DATABASE** and specify "CustomerOrders" as the database name. Then click the **OK** button.
 
-    ![Creating a Customers collection](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/create-collection-and-database.png)
+    ![Creating a Customers collection](Images/create-collection-and-database.png)
 
     _Creating a Customers collection_
 
 1. Click **+ Add Collection** again. Fill in the form as shown below to create a second collection named "Orders." Be sure to add it to the existing database ("CustomerOrders") rather than create a new database. Then click **OK**.
 
-    ![Adding an Orders collection](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/add-orders-collection.png)
+    ![Adding an Orders collection](Images/add-orders-collection.png)
 
     _Adding an Orders collection_
 
@@ -122,13 +122,13 @@ There are several ways to populate DocumentDB collections with documents, includ
 
 1. Click **Document Explorer** in the menu on the left. Make sure **Customers** is selected in the drop-down list of collections, and click **Upload**.
 
-    ![Opening Document Explorer](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-document-explorer.png)
+    ![Opening Document Explorer](Images/open-document-explorer.png)
 
     _Opening Document Explorer_
 
 1. Click the folder icon. Select all of the files in this lab's "Resources/Customers" folder, and then click the **Upload** button.
 
-    ![Uploading customer data](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/upload-customer-data.png)
+    ![Uploading customer data](Images/upload-customer-data.png)
 
     _Uploading customer data_
 
@@ -156,27 +156,19 @@ There are several ways to populate DocumentDB collections with documents, includ
 
 1. Close the "Upload Document" blade and return to the "Document Explorer" blade. Select **Orders** from the drop-down list of collections and click **Upload**. Then upload all of the files in this lab's "Resources/Orders" folder to the Orders collection.
 
-    ![Uploading order data](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/upload-order-data.png)
-
-    _Uploading order data_
-
 1. Repeat this process to upload all of the files in this lab's "Resources/Products" folder to the Products collection.
 
-    ![Uploading product data](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/upload-product-data.png)
+1. The next step is to validate the document uploads by querying one or more of the collections. Click **Query Explorer** in the menu on the left. Select **Orders** in the drop-down list of collections, and then click the **Run Query** button.
 
-    _Uploading product data_
+	> Although you won't use DocumentDB's rich query capabilities directly in this lab, be aware that DocumentDB supports a variation of the SQL query language for extracting information from JSON data. For more information, and plenty of examples, see https://docs.microsoft.com/azure/documentdb/documentdb-sql-query.
 
-1. The next step is to validate the document uploads by querying one or more of the collections. Click **Query Explorer** in the menu on the left. Select **Orders** in the drop-down list of collections, and then click the **Run Query**.
-
-	> Although you won't use DocumentDB's rich query capabilities directly in this lab, be aware that DocumentDB supports a variation of the SQL query language for extracting information from JSON data. For more information, and plenty of examples, see https://docs.microsoft.com/en-us/azure/documentdb/documentdb-sql-query.
-
-    ![Querying the Orders collection](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-query-explorer.png)
+    ![Querying the Orders collection](Images/open-query-explorer.png)
 
     _Querying the Orders collection_
 
 1. Confirm that you see the query results below.
 
-    ![Query results](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/query-results.png)
+    ![Query results](Images/query-results.png)
 
     _Query results_
 
@@ -191,147 +183,117 @@ One of the benefits of using DocumentDB is that it integrates easily with [Azure
 
 1.	In the Azure Portal, click **+ New**, followed by **Web + Mobile** and then **Azure Search**.
 	
-    ![Creating a new Azure Search service](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-create-new-search-service.png)
+    ![Creating a new Azure Search service](Images/portal-create-new-search-service.png)
 
     _Creating a new Azure Search service_
 
-1. In the "New Search Service" blade, give the service a unique name in the **URL** box and make sure a green check mark appears next to it. (You can only use numbers and lowercase letters since the name becomes part of a DNS name.) Select **Use existing** under **Resource group** and select the resource group you created for the DocumentDB account in [Exercise 1](#Exercise1).Select the **Location** nearest you, and then click the **Create** button.
+1. In the "New Search Service" blade, enter a unique name in the **URL** box and make sure a green check mark appears next to it. (You can only use numbers and lowercase letters since the name becomes part of a DNS name.) Place the service in the same resource group and location you chose for the Cosmos DB account in [Exercise 1](#Exercise1).
 
-    ![Specifying Search parameters](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-configure-new-search-service.png)
+	Now click **Pricing tier** and select the **Free** tier. Finish up by clicking the **Select** button at the bottom of the "Choose your pricing tier" blade, followed by the **Create** button at the bottom of the "New Search Service" blade.
+
+    ![Specifying Search parameters](Images/portal-configure-new-search-service.png)
 
     _Specifying Search parameters_
 
 1. Click **Resource groups** in the ribbon on the left side of the portal, and then click the resource group containing the DocumentDB account and Search service.
  
-    ![Opening the resource group](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-resource-group.png)
+    ![Opening the resource group](Images/open-resource-group.png)
 
     _Opening the resource group_
 
-1. Wait until "Deploying" changes to "Succeeded," indicating that the Search service has been deployed. Then click the Search service.
+1. Wait until "Deploying" changes to "Succeeded," indicating that the Search service has been deployed. (You can click the **Refresh** button at the top of the blade to refresh the deployment status.) Then click the Search service.
 
-	> Refresh the page in the browser every now and then to update the deployment status. Clicking the **Refresh** button in the resource-group blade refreshes the list of resources in the resource group, but does not reliably update the deployment status.
-
-    ![Opening the Search service](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/open-search.png)
+    ![Opening the Search service](Images/open-search.png)
 
     _Opening the Search service_
 
 1. Click **Import data**.
 	
-    ![Importing data](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-select-import-data.png)
+    ![Importing data](Images/portal-select-import-data.png)
 
     _Importing data_
 
-1. Click **Data Source**, followed by **DocumentDB**. In the "New data source" blade, type "customers" (without quotation marks) into the **Name** field. Click **Select an account** and select the DocumentDB account you created in [Exercise 1](#Exercise1). Select the **CustomerOrders** database and the **Customers** collection. Then click **OK**.
+1. Click **Data Source**, followed by **DocumentDB**. In the "New data source" blade, type "customers" into the **Name** field. Click **Select an account** and select the Cosmos DB account you created in [Exercise 1](#Exercise1). Select the **CustomerOrders** database and the **Customers** collection. Then click **OK**.
 
-    ![Connecting to a data source](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-connect-search-datasource.png)
+    ![Connecting to a data source](Images/portal-connect-search-datasource.png)
 
     _Connecting to a data source_
 
-1. Click **Index** in the "Import data" blade. In the "Index" blade, type "customerindex" (without quotation marks) into the **Index name** field, and then check all five boxes in the CompanyName row. Then click **OK**.
+1. Click **Customize target index** in the "Import data" blade. In the "Index" blade, type "customerindex" (without quotation marks) into the **Index name** field, and check all five boxes in the CompanyName row. Then click **OK**.
 
-    ![Configuring a search index](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-configure-search-index.png)
+    ![Configuring a search index](Images/portal-configure-search-index.png)
 
     _Configuring a search index_
 
-1. Click **Indexer** in the "Import data" blade. In the "Indexer" blade, type "customerindexer" into the **Name** field and click **OK**. Finish up by clicking the **OK** button at the bottom of the "Import data" blade.
+1. Click **Import your data** in the "Import data" blade. In the "Create an Indexer" blade, type "customerindexer" into the **Name** field and click **OK**. Finish up by clicking the **OK** button at the bottom of the "Import data" blade.
 	
-    ![Configuring a search indexer](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-configure-search-indexer.png)
+    ![Configuring a search indexer](Images/portal-configure-search-indexer.png)
 
     _Configuring a search indexer_
  
 With the DocumentDB database deployed and an Azure Search service connected to it, it is time to put both to work by building a Web app that uses them to display customer, product, and order information.
 
 <a name="Exercise5"></a>
-## Exercise 5: Build an Azure Web App ##
+## Exercise 5: Build a Web app ##
 
-[Azure Web Apps](https://azure.microsoft.com/en-us/documentation/articles/app-service-web-overview/) allow you to quickly and easily deploy Web sites built with tools and languages you're familiar with. In this exercise, you will build an ASP.NET MVC Web app with Visual Studio and configure it so that it can be deployed to the cloud as an Azure Web App. The app will connect to the DocumentDB database deployed and populated with data in previous exercises and provide a browser-based front-end for viewing and searching the data.
+In this exercise, you will build an ASP.NET MVC Web app with Visual Studio. The app will connect to the DocumentDB database you deployed and populated with data in previous exercises and provide a browser-based front-end for viewing and searching the data.
 
-1.	Start Visual Studio 2015 and use the **File -> New -> Project** command to create a new Visual C# ASP.NET Web Application project named "AdventureDoc" (short for "Adventure Works Documents").
+1.	Start Visual Studio and use the **File -> New -> Project** command to create a new Visual C# ASP.NET Web Application project named "AdventureDocs" (short for "Adventure Works Documents").
  
-    ![Creating a new Web Application project](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-create-new-web-app.png)
+    ![Creating a new Web Application project](Images/vs-create-new-web-app.png)
 
     _Creating a new Web Application project_
 
-1.	In the "New ASP.NET Web Application" dialog, select the **MVC** template. Then click the **Change Authentication** button and select **No Authentication**. (This simplifies the app by omitting authentication infrastructure.) Next, make sure the **Host in the cloud** box is checked and that **App Service** is selected in the drop-down list below the check box. Finally, click **OK**.
+1. In the ensuing dialog, make sure **MVC** is selected. Then click **OK**.
  
-    ![Configuring the project](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-configure-web-app.png)
+    ![Configuring the project](Images/vs-configure-web-app.png)
 
     _Configuring the project_
 
-1.	In the "Create App Service" dialog, make sure **DocumentDBResourceGroup** is selected under **Resource Group**. (This will add the Azure Web App to the same resource group as the DocumentDB account and the Azure Search service, which is handy because deleting the resource group will delete all three.) Then click the **New** button next to **App Service Plan** and select the location nearest you for hosting the Web App, and **Free** as the **Size.** Click **OK** to dismiss the "Configure App Service Plan" dialog. Then click **Create** at the bottom of the "Create App Service" dialog.
-	
- 	![Creating an App Service](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-create-app-service.png)
-
-    _Creating an App Service_
-
-1. Take a moment to review the project structure in the Solution Explorer window. Among other things, there's a folder named "Controllers" that holds the project's MVC controllers, and a folder named "Views" that holds the project's views. You will be working with assets in these folders and others as you implement the application.
-
 1. Use Visual Studio's **Debug -> Start Without Debugging** command (or simply press **Ctrl+F5**) to launch the application in your browser. Here's how the application looks in its present state:
 	 
-    ![The initial application](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-initial-application.png)
+    ![The initial application](Images/vs-initial-application.png)
 
     _The initial application_
 
-1. Close the browser and return to Visual Studio. In the Solution Explorer window, right-click the **AdventureDocs** project and select **Manage NuGet Packages...**.
+1. Close the browser and return to Visual Studio. In the Solution Explorer window, right-click the **AdventureDocs** project and select **Manage NuGet Packages...**. Click **Browse**. Then type "documentdb" (without quotation marks) into the search box. Click **Microsoft.Azure.DocumentDB** to select the Azure DocumentDB .NET Client Library from NuGet. Finally, click **Install** to install the latest stable version of the package. This package contains APIs for accessing Azure DocumentDB from .NET applications. OK any changes and accept any licenses presented to you.
 	 
-    ![Managing NuGet packages for the project](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-select-manage-packages.png)
-
-    _Managing NuGet packages for the project_
-
-1. Click **Browse**. Then type "documentdb" (without quotation marks) into the search box. Click **Microsoft.Azure.DocumentDB** to select the Azure DocumentDB .NET Client Library from NuGet. Finally, click **Install** to install the latest stable version of the package. This package contains APIs for accessing Azure DocumentDB from .NET applications. Click **OK** if you're prompted to review changes, and **I Accept** if prompted to accept licenses for downloaded packages.
-	 
-    ![Installing Microsoft.Azure.DocumentDB](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-add-documentdb-package.png)
+    ![Installing Microsoft.Azure.DocumentDB](Images/vs-add-documentdb-package.png)
 
     _Installing Microsoft.Azure.DocumentDB_
 
-1. Repeat this process to add the NuGet package named **Microsoft.WindowsAzure.ConfigurationManager** to the project. This package contains APIs for loading configuration settings. Once more, OK any changes and accept any licenses presented to you.
-	
-    ![Installing Microsoft.WindowsAzure.ConfigurationManager](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-add-configuration-package.png)
-
-    _Installing Microsoft.WindowsAzure.ConfigurationManager_
-
 1. Repeat this process to add the NuGet package named **Microsoft.Azure.Search** to the project. This package contains APIs for accessing Azure Search from .NET applications. Once more, OK any changes and accept any licenses presented to you.	
 	
-    ![Installing Microsoft.Azure.Search](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-add-search-package.png)
+    ![Installing Microsoft.Azure.Search](Images/vs-add-search-package.png)
 
     _Installing Microsoft.Azure.Search_
 
-1. Repeat this process to add the NuGet package named **jQuery.UI.Combined** to the project. This package contains APIs and file elements required by MVC 5 for jQuery user interface elements. Once more, OK any changes and accept any licenses presented to you.
+1. Repeat this process to add the NuGet package named **jQuery.UI.Combined** to the project. This package contains APIs for jQuery user-interface elements. Once more, OK any changes and accept any licenses presented to you.
 	
-    ![Installing jQuery.UI.Combined](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-add-jquery-package.png)
+    ![Installing jQuery.UI.Combined](Images/vs-add-jquery-package.png)
 
     _Installing jQuery.UI.Combined_
 
-1. In the Solution Explorer window, double-click **Web.config** to open it for editing.
-	
-    ![Opening Web.config](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-open-web-config.png)
+1. Open **Web.config** and add the following statements to the ```<appSettings>``` section:
 
-    _Opening Web.config_
+	```XML
+	<add key="DocumentDBEndpointUrl" value="DOCUMENTDB_ENDPOINT" />
+	<add key="DocumentDBKey" value="DOCUMENTDB_KEY" />
+	```
 
-1. Return to the Azure Portal and open the blade for the DocumentDB account that you created in [Exercise 1](#Exercise1). Click **Keys**. Then click **Read-only keys**, and click the **Copy** button to the right of the **URI** box to copy the DocumentDB URI to the clipboard.
+1. Return to the Azure Portal and open the blade for the Cosmos DB account that you created in [Exercise 1](#Exercise1). Click **Keys**. Then click **Read-only Keys**, and click the **Copy** button to the right of the **URI** box to copy the DocumentDB URI to the clipboard.
 	
-    ![Copying the DocumentDB URI](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/copy-documentdb-uri.png)
+    ![Copying the DocumentDB URI](Images/copy-documentdb-uri.png)
 
     _Copying the DocumentDB URI_
 
-1.	Return to Visual Studio. In **Web.config**, add the following statement to the \<appSettings\> section, replacing *documentdb_endpoint* with the URI on the clipboard:
+1.	Return to Visual Studio. In **Web.config**, replace DOCUMENTDB_ENDPOINT with the URI on the clipboard.
 	
-	```XML
-	<add key="DocumentDBEndpointUrl" value="documentdb_endpoint" />
-	```
 1. Return to the Azure Portal and click the **Copy** button to the right of **PRIMARY READ-ONLY KEY** to copy the access key the clipboard.
 	
-    ![Copying the DocumentDB access key](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/copy-documentdb-key.png)
+1. Return to Visual Studio. In **Web.config**, replace DOCUMENTDB_KEY with the key on the clipboard.
 
-    _Copying the DocumentDB access key_
-
-1. Return to Visual Studio. In **Web.config**, add the following statement to the \<appSettings\> section, replacing *documentdb_key* with the access key on the clipboard:
-
-	```XML
-	<add key="DocumentDBKey" value="documentdb_key" />
-	```	
-
-1. In the Solution Explorer window, find the file named **_Layout.cshtml** in the "Views/Shared" folder. Double-click it to open it. Then replace its contents with the following statements: 
+1. Open **_Layout.cshtml** in the project's "Views/Shared" folder. Then replace the file's contents with the following statements: 
 
 	```HTML
 	<!DOCTYPE html>
@@ -380,16 +342,9 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	    @RenderSection("scripts", required: false)
 	</body>
 	</html>
-	
 	```
 
-1. In Solution Explorer, right-click the "Models" folder and select **Add -> Class...**. Then type "OrderInformation.cs" (without quotation marks) into the **Name** box and click **OK** to add the class to project.
-
-    ![Adding a class to the "Models" folder](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-add-class-to-models.png)
-
-    _Adding a class to the "Models" folder_
-
-1. Replace the empty *OrderInformation* class with the following class definitions, and note that you are making the classes public rather than private, as well as marking the *OrderInformation* class "Serializable:"
+1. Right-click the "Models" folder in Solution Explorer and use the **Add -> Class...** command to add a class file named **OrderInformation.cs**. Then replace the empty ```OrderInformation``` class with the following class definitions:
 
 	```C#
  	[Serializable]
@@ -461,7 +416,7 @@ With the DocumentDB database deployed and an Azure Search service connected to i
     }
 	```
 
-1. Right-click the "Models" folder again and use the **Add -> Class...** command to add a file named **SearchResultInformation.cs** to the folder. Replace the empty *SearchResultInformation* class with the following class definition:
+1. Right-click the "Models" folder again and use the **Add -> Class...** command to add a file named **SearchResultInformation.cs** to the folder. Replace the empty ```SearchResultInformation``` class with the following class definition:
 
 	```C#
 	public class SearchResultInformation
@@ -472,7 +427,7 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	}
 	```
 
-1. Repeat this process to add an *OrderViewModel* class to the "Models" folder, and replace the empty class with the following class definition:
+1. Repeat this process to add an ```OrderViewModel``` class to the "Models" folder, and replace the empty class with the following class definition:
 	
 	```C#
 	public class OrderViewModel
@@ -498,6 +453,7 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	using Newtonsoft.Json;
 	using System.Threading.Tasks;
 	using AdventureDocs.Models;
+	using System.Configuration;
 	
 	namespace AdventureDocs.Helpers
 	{
@@ -505,11 +461,9 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	    {
 	        public static DocumentClient GetDocumentClient()
 	        {
-	            string endpointUrl = Microsoft.Azure.CloudConfigurationManager.GetSetting("DocumentDBEndpointUrl");
-	            string primaryKey = Microsoft.Azure.CloudConfigurationManager.GetSetting("DocumentDBKey");
-	
+                string endpointUrl = ConfigurationManager.AppSettings["DocumentDBEndpointUrl"];
+                string primaryKey = ConfigurationManager.AppSettings["DocumentDBKey"];
 	            DocumentClient client = new DocumentClient(new Uri(endpointUrl), primaryKey);
-	
 	            return client;
 	        }
 	
@@ -529,13 +483,11 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	                    collections = (from feed in collFeed select feed.Id).ToList();
 	                }
 	            }
-	            catch (Exception ex)
+	            catch (Exception)
 	            {
-	
 	            }
 	
 	            return collections;
-	
 	        }
 	
 	        public static List<SearchResultInformation> GetOrdersByOrder(DocumentClient client, string countryName)
@@ -610,24 +562,21 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	}
 	```
 
-1. Open **HomeController.cs** in the project's "Controllers" folder. Add the following using statements to the top of the file:
+1. Open **HomeController.cs** in the project's "Controllers" folder. Add the following ```using``` statements to the top of the file:
 
 	```C#
 	using System.Threading.Tasks;
 	using AdventureDocs.Models;
 	```
 
-1. Replace the *Index* method in **HomeController.cs** with the following implementation:
+1. Replace the ```Index``` method in **HomeController.cs** with the following implementation:
 
 	```C#
 	public async Task<ActionResult> Index()
 	{
 	    var model = new OrderViewModel() { SearchResults = new List<SearchResultInformation>() };
-	
 	    var documentClient = Helpers.DocumentHelper.GetDocumentClient();
-	
 	    var availableCollections = await Helpers.DocumentHelper.GetAvailableCollectionNamesAsync(documentClient);
-	
 	    var searchResults = (List<SearchResultInformation>)TempData["SearchResults"];
 	    var searchQuery = (string)Request["SearchQuery"];
 	
@@ -635,7 +584,6 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	    {
 	        model.SearchQuery = (string)TempData["SearchQuery"];
 	        model.SearchResults = (List<SearchResultInformation>)TempData["SearchResults"];
-	
 	        model.SelectedCollectionName = (string)TempData["SelectedCollectionName"];
 	        model.SearchResultTitle = $"{model.SelectedCollectionName}";
 	        model.SearchResultDescription = $"The following results were found in {model.SelectedCollectionName} for '{model.SearchQuery.ToUpper()}':";
@@ -643,11 +591,8 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	    else if (!string.IsNullOrEmpty(searchQuery))
 	    {
 	        model.SearchQuery = searchQuery;
-	
 	        searchResults = Helpers.DocumentHelper.GetOrdersByCustomer(documentClient, searchQuery);
-	
 	        model.SearchResults = searchResults;
-	
 	        model.SelectedCollectionName = "Customers";
 	        model.SearchResultTitle = $"{model.SelectedCollectionName}";
 	        model.SearchResultDescription = $"The following results were found in {model.SelectedCollectionName} for '{model.SearchQuery.ToUpper()}':";
@@ -666,7 +611,7 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	
 	```
 	
-1. Add the following methods to the *HomeController* class in **HomeController.cs**:
+1. Add the following methods to the ```HomeController``` class in **HomeController.cs**:
 	
 	```C#
 	public ActionResult Lookup()
@@ -689,11 +634,8 @@ With the DocumentDB database deployed and an Azure Search service connected to i
     public ActionResult Search(OrderViewModel model)
     {
         ViewBag.Message = "Your application description page.";
-	
         string searchQuery = model.SearchQuery + "";
-	
         var documentClient = Helpers.DocumentHelper.GetDocumentClient();
-	
         List<SearchResultInformation> searchResults = new List<SearchResultInformation>();
 	
         switch (model.SelectedCollectionName)
@@ -782,8 +724,8 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	@Scripts.Render("~/bundles/jqueryui")
 	
 	<script type="text/javascript">
-	    $(document).ready(function () {
-	 
+	Â Â Â Â $(document).ready(function () {
+	Â 
 	        $('#customers').autocomplete({
 	            source: '@Url.Action("Suggest")',
 	            autoFocus: true,
@@ -794,8 +736,8 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	                    $("form").submit();
 	                }
 	            }
-	        }); 
-	    })
+	Â Â Â Â     });Â 
+	Â Â Â Â })
 	</script>
 	
 	<div class="row">
@@ -814,7 +756,7 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 	</div>
 	```
 
-1. Open **BundleConfig.cs** in the project's "App_Start" folder. Add the following code at the end of the **RegisterBundles** method:
+1. Open **BundleConfig.cs** in the project's "App_Start" folder. Add the following code at the end of the ```RegisterBundles``` method:
 
 	```C#
 	bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include("~/Scripts/jquery-ui-{version}.js"));
@@ -828,34 +770,34 @@ With the DocumentDB database deployed and an Azure Search service connected to i
 
 1. **Type** the letter "a" in the **Search for** box and click the **Search** button. Confirm that a list of customer names starting with A appears on the page:
 	
-    ![Searching for customer names that begin with A](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-documentsearch-01.png)
+    ![Searching for customer names that begin with A](Images/vs-documentsearch-01.png)
 
     _Searching for customer names that begin with A_
 
 1. Select **Products** from the list of collections and click the **Search** button. Confirm that a list of product names starting with A appears on the page:
 	
-    ![Searching for product names that begin with A](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-documentsearch-02.png)
+    ![Searching for product names that begin with A](Images/vs-documentsearch-02.png)
 
     _Searching for product names that begin with A_
 
 1. Replace the letter "a" in the **Search for** box with the letter "m." Then select **Orders** and click the **Search** button. Confirm that a list of orders appears, with the countries they were shipped to listed on the right:
 	
-    ![Searching for orders shipped to countries that begin with M](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-documentsearch-03.png)
+    ![Searching for orders shipped to countries that begin with M](Images/vs-documentsearch-03.png)
 
     _Searching for orders shipped to countries that begin with M_
 
 1. The Orders listing displays the CompanyName and ShipRegion values from the orders returned in the search results. To view the entire order, click **[view document]** to the right of an order. The result is the JSON defining the order:
 	
-    ![Viewing an entire order](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-documentsearch-04.png)
+    ![Viewing the JSON for an order](Images/vs-documentsearch-04.png)
 
-    _Viewing an entire order_	
+    _Viewing the JSON for an order_	
 
 This is a great start, and it demonstrates how an ASP.NET MVC Web app can access data stored in the cloud in a DocumentDB database. But right now, the search UI is somewhat clumsy; you have to enter letters blindly, without any feedback to tell you whether there are any matching documents. Let's enhance the UI by adding auto-suggest.
 
 <a name="Exercise6"></a>
 ## Exercise 6: Add auto-suggest ##
 
-Azure Search enables super-fast retrieval of indexed values in the data stores is is connected to. In this exercise, you will leverage that speed to add an auto-suggest list to customer search to provide feedback to the user as he or she types.
+Azure Search enables super-fast retrieval of indexed values in the data stores it is connected to. In this exercise, you will leverage that speed to add an auto-suggest list to customer search to provide feedback to the user as he or she types.
 
 1. Return to Visual Studio. Right-click the "Helpers" folder and use the **Add -> Class...** command to add a file named **SearchHelper.cs** to the folder. Replace the contents of the file with the following statements:
 
@@ -868,6 +810,7 @@ Azure Search enables super-fast retrieval of indexed values in the data stores i
 	using System.Threading.Tasks;
 	using System.Web;
 	using AdventureDocs.Models;
+	using System.Configuration;
 	
 	namespace AdventureDocs.Helpers
 	{
@@ -877,13 +820,11 @@ Azure Search enables super-fast retrieval of indexed values in the data stores i
 	        {
 	            List<string> suggestions = new List<string>();
 	
-	            string searchServiceName = Microsoft.Azure.CloudConfigurationManager.GetSetting("SearchServiceName");
-	            string searchServiceKey = Microsoft.Azure.CloudConfigurationManager.GetSetting("SearchServiceKey");
+	            string searchServiceName = ConfigurationManager.AppSettings["SearchServiceName"];
+	            string searchServiceKey = ConfigurationManager.AppSettings["SearchServiceKey"];
 	
 	            SearchServiceClient serviceClient = new SearchServiceClient(searchServiceName, new SearchCredentials(searchServiceKey));
-	
 	            ISearchIndexClient indexClient = serviceClient.Indexes.GetClient("customerindex");
-	
 	            DocumentSearchResult<Customer> response = indexClient.Documents.Search<Customer>($"{query.Trim()}*");
 	
 	            suggestions = (from result in response.Results
@@ -895,27 +836,24 @@ Azure Search enables super-fast retrieval of indexed values in the data stores i
 	}
 	```
 
-1. Open **Web.config** and add the following statement to the \<appSettings\> section, replacing *search_service_name* with the name you assigned to the Azure Search service in Exercise 4, Step 2:
+1. Open **Web.config** and add the following statements to the ```<appSettings>``` section, replacing SEARCH_SERVICE_NAME with the name you assigned to the Azure Search service in Exercise 4, Step 2:
 
 	```XML
-	<add key="SearchServiceName" value="search_service_name" />
+	<add key="SearchServiceName" value="SEARCH_SERVICE_NAME" />
+	<add key="SearchServiceKey" value="SEARCH_SERVICE_KEY" />
 	```
 
 1. Return to the Azure Portal and open the blade for the Azure Search service. Click **Keys**, followed by **Manage query keys**. Then copy the query key to the clipboard.
 
 	> The purpose of query keys is to allow applications to query the Search service and to do so securely.
 
-    ![Copying the query key to the clipboard](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/portal-copy-search-query-key.png)
+    ![Copying the query key to the clipboard](Images/portal-copy-search-query-key.png)
 
     _Copying the query key to the clipboard_
 
-1. Return to Visual Studio. Add the following statement to the \<appSettings\> section of **Web.config**, replacing *search_service_key* with the query key on the clipboard.
+1. Return to Visual Studio. In **Web.config**, replace SEARCH_SERVICE_KEY with the query key on the clipboard.
 
-	```XML
-	<add key="SearchServiceKey" value="search_service_key" />
-	```
-
-1. Add the following methods to the *HomeController* class in **HomeController.cs**:
+1. Add the following methods to the ```HomeController``` class in **HomeController.cs**:
 	
 	```C#
 	[HttpPost]
@@ -950,7 +888,7 @@ Azure Search enables super-fast retrieval of indexed values in the data stores i
 
 1. Click **Customer Lookup**. Then type "ar" into the **Search for** box and wait for a list of suggested customers to appear.
 
-    ![Auto-suggest in action](https://github.com/Microsoft/TechnicalCommunityContent/raw/master/Data/Azure%20DocumentDB/Session%202%20-%20Hands%20On/Images/vs-view-autosuggest.png)
+    ![Auto-suggest in action](Images/vs-view-autosuggest.png)
 
     _Auto-suggest in action_
 
@@ -958,23 +896,19 @@ Azure Search enables super-fast retrieval of indexed values in the data stores i
 
 Auto-suggest vastly improves the search experience and is relatively easy to add thanks to some of the classes you imported in NuGet packages in [Exercise 5](#Exercise5).
 
-When you created the project for the Web app in Visual Studio, you checked the **Host in the cloud** box so the app could be deployed to Azure, and you created an Azure App Service to host it. Up to now, the app has run locally. If you would like to deploy it to Azure so it can be opened from anywhere, simply right-click the project in Solution Explorer, select **Publish** from the context menu, and click the **Publish** button in the ensuing dialog. Once the app has been published, it will open in a browser window.
-
-When you're finished using the app, it is recommended that you delete the resource group containing it. Since you placed the Azure Web App in the same resource group as the DocumentDB account and the Search service, deleting the resource group deletes **all** of these resources, removes all traces of this lab from your account, and prevents any further charges from being incurred for it. To delete the resource group, simply open the resource-group blade in the portal and click **Delete** at the top of the blade. You will be asked to type the resource group's name to confirm that you want to delete it, because once deleted, a resource group can't be recovered.
-
 <a name="Summary"></a>
 ## Summary ##
 
 In this hands-on lab you learned how to:
 
-- Create an Azure DocumentDB account
+- Create an Azure Cosmos DB account
 - Create DocumentDB collections and populate them with documents
 - Create an Azure Search service and and use it to index DocumentDB data
-- Access Azure DocumentDB collections from your apps
+- Access DocumentDB collections from your apps
 - Query the Azure Search service connected to a DocumentDB database
 
-Not surprisingly, there is much more you can do to leverage the power of Azure DocumentDB. Experiment with other DocumentDB features, especially [triggers, stored procedures, and user-defined functions](https://docs.microsoft.com/en-us/azure/documentdb/documentdb-programming), and identify other ways you can enhance your data and search strategies by integrating Azure DocumentDB into your application ecosystems.
+Not surprisingly, there is much more you can do to leverage the power of the DocumentDB API. Experiment with other DocumentDB features, especially [triggers, stored procedures, and user-defined functions](https://docs.microsoft.com/en-us/azure/documentdb/documentdb-programming), and identify other ways you can enhance your data and search strategies by integrating Azure Cosmos DB and the DocumentDB API into your application ecosystems.
 
 ----
 
-Copyright 2016 Microsoft Corporation. All rights reserved. Except where otherwise noted, these materials are licensed under the terms of the MIT License. You may use them according to the license as is most appropriate for your project. The terms of this license can be found at https://opensource.org/licenses/MIT.
+Copyright 2017 Microsoft Corporation. All rights reserved. Except where otherwise noted, these materials are licensed under the terms of the MIT License. You may use them according to the license as is most appropriate for your project. The terms of this license can be found at https://opensource.org/licenses/MIT.

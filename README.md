@@ -1,1 +1,1 @@
-# Global Azure Bootcamp 2017 - Finland
+# Global Azure Bootcamp 2018 - Finland
